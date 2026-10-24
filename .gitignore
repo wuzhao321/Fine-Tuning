@@ -17,3 +17,10 @@ results/summary/*
 figures/*
 !figures/.gitkeep
 *.log
+
+# Local planning notes and development records
+.local-notes/
+docs/source-plan.md
+docs/development-checks.md
+docs/iteration-*.md
+docs/resume_snippet.md

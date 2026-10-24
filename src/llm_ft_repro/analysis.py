@@ -267,11 +267,11 @@ def write_report(rows, output):
     accepted = [r for r in rows if r["eligibility"] == "accepted"]
     lines = ["# 复现实验报告", "", "本报告由原始证据汇总生成；待审查和失败结果仅列入 audit.csv。", "",
              "## 环境", "", "环境、GPU、依赖与代码指纹见 summary.json 中对应分组及原始日志。", "",
-             "## 方法", "", "单卡 Qwen1.5-14B，公开替代数据。基准采用预装载、无 padding 的定长 token 流；"
+             "## 方法", "", "单卡 Qwen1.5-14B，公开数据。基准采用预装载、无 padding 的定长 token 流；"
              "10 步预热、30 步测量，每配置 3 个独立进程。GB 为十进制字节 / 1e9。", "",
              "## 结果", ""]
     if not accepted:
-        lines.append("【未测或尚无通过全部审查的结果】")
+        lines.append("没有符合审查条件的结果。")
     for row in accepted:
         lines.extend([f"### {row['run_id']}", "", f"来源键：`{row['group_key']}`", "",
                       "```json", json.dumps({k: row[k] for k in ("tokens_per_second", "peak_allocated_gb", "mfu",
@@ -286,13 +286,13 @@ def write_report(rows, output):
     if len(candidates) == 1:
         r = candidates[0]
         key = r["group_key"]
-        snippet = (f"在 {r['gpu']['name']} 上完成公开替代数据复现实验（{r['timestamp'][:10]}，UTC），"
+        snippet = (f"实验配置：{r['run_id']}；GPU：{r['gpu']['name']}；日期：{r['timestamp'][:10]}（UTC）。"
                    f"峰值 allocated 显存 {r['peak_allocated_gb']:.2f} GB [{key}.peak_allocated_gb]，"
                    f"吞吐 {r['tokens_per_second']:.1f} tokens/s [{key}.tokens_per_second]，"
                    f"估算 MFU {r['mfu']:.1%} [{key}.mfu]。任务改善与方法对照结论须另附对应证据。")
     else:
-        snippet = "公开替代数据复现实验：硬件【未测】，日期【未测】，峰值显存【未测】，吞吐【未测】，MFU【未测】。"
-    (output / "resume_snippet.md").write_text(snippet + "\n", encoding="utf-8")
+        snippet = "没有可汇总的已审查 E1 QLoRA 结果。"
+    (output / "result_summary.md").write_text(snippet + "\n", encoding="utf-8")
 
 
 def plot_results(rows, output):

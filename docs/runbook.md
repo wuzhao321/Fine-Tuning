@@ -1,14 +1,14 @@
-# 后续运行手册
+# 运行手册
 
-本轮仅完成代码与文档。以下 GPU 命令留待具备目标环境、选定数据后执行；不是已完成的实验记录。所有命令从仓库根目录运行。
+本手册覆盖实验身份固定、数据准备、E0–E6 执行和报告生成。所有命令从仓库根目录运行，GPU 命令需要与配置匹配的 CUDA 环境和已登记数据。
 
 ## 1. 先冻结实验身份
 
 - 按 env.md 选定 Python / torch / CUDA / transformers / peft / bitsandbytes / flash-attn 组合，完成最小验证后保存锁文件和镜像 digest。
 - 把 configs/base.yaml 的 `model.revision` 从 `main` 改成已核实的 Hugging Face commit SHA；数据准备和全部实验使用同一 revision。当前 `main` 只方便阅读配置，实际远程模型/tokenizer 加载会拒绝未固定的 revision。
 - 配置 `CUDA_VISIBLE_DEVICES` 与 `hardware.nvml_device` 为同一块物理卡；后者可填 GPU UUID。A100 默认峰值 312 TFLOPS，换卡要核实稠密 bf16 峰值。
-- 提交代码、配置和已锁定依赖，记录提交号。当前空仓库没有提交；汇总会阻止缺少提交号的结果被引用。
-- 在目标机器检查 80GB 显存、150GB 空闲磁盘、64GB 内存；记录 GPU 型号、驱动、CPU、功耗限制。这里只提供步骤，尚未连接目标机器。
+- 提交代码、配置和已锁定依赖，记录提交号。汇总会阻止缺少提交号的结果被引用。
+- 在目标机器检查 80GB 显存、150GB 空闲磁盘、64GB 内存；记录 GPU 型号、驱动、CPU、功耗限制。资源要求应与具体实验配置一并核实。
 
 ## 2. E0
 
@@ -27,7 +27,7 @@ python scripts/hash_model.py /path/to/model-snapshot --output /path/to/model-man
 
 ## 3. 准备数据
 
-按 docs/data.md 填写真实来源清单和 normalized JSONL，不能使用仓库里的演示句子作为实验数据。选定数据前不下载候选数据集。
+按 docs/data.md 填写真实来源清单和 normalized JSONL，不能使用仓库里的演示句子作为实验数据。数据下载和字段映射应依据已选来源的版本与许可进行。
 
 ```bash
 python scripts/repro.py prepare-data --config configs/train/e5_qlora.yaml \
@@ -58,7 +58,7 @@ E1 / E2 / E3 / E4 分别计划 6 / 18 / 45 / 6 个独立子进程。矩阵每次
 
 E2 eager 无 GC 第一次若 OOM，会追加 `e2_eager_fallback`（batch 1 / seq 1024）的三个独立尝试。原配置 OOM 保留，剩余相同配置的重复会跳过并写入账本，降级点不代替原表。其他 OOM 不自动改变配置，同样跳过剩余重复。出现 OOM 后矩阵可继续后续不同配置，退出码 2 表示包含失败结果。非 OOM 失败或子进程缺少终止证据时立即停止，避免继续消耗预算。
 
-每个子进程使用唯一 job_id 与结果日志关联，不以最新修改时间推断结果。修改 raw_dir 或目录里保留旧 OOM 日志不会把历史失败误认为本次结果。
+每个子进程使用唯一 job_id 与结果日志关联，不以最新修改时间推断结果。修改 raw_dir 或目录里保留旧 OOM 日志不会把历史失败误认为当前任务结果。
 
 数值等价检查独立于性能矩阵，不开 dropout。提前在审查记录中写明容差理由，再运行：
 
@@ -86,7 +86,7 @@ python scripts/repro.py train --config configs/train/e5_qlora.yaml \
 
 源码指纹包含 src、scripts、configs；因此修改其他实验配置也会使严格恢复身份变化。需要继续原实验时使用原始快照，不要绕过校验。历史未带完整性记录的检查点会被拒绝；不能凭文件存在就宣称可精确恢复。
 
-新尝试写入新目录并记录父检查点及其完整性记录哈希，旧证据保留。自动只保留最近三个中间检查点（TrainingArguments 的 save_total_limit）；最终 adapter 单独保存并生成完整性记录。GPU 上恢复优化器和 RNG 的实际行为仍待验收。
+新尝试写入新目录并记录父检查点及其完整性记录哈希，旧证据保留。自动只保留最近三个中间检查点（TrainingArguments 的 save_total_limit）；最终 adapter 单独保存并生成完整性记录。恢复后应核对优化器状态、RNG 状态和 global_step，以确认训练连续性。
 
 ## 6. E6
 
@@ -107,12 +107,12 @@ python scripts/repro.py review-template --output /path/to/reviews.json
 python scripts/repro.py summarize --reviews /path/to/reviews.json --excel --figures
 ```
 
-默认输出 results/summary；图表在 results/summary/figures。没有原始数据时生成空表和“未测”报告；有数据但未审查时生成审计表，不自动发表数字。README 的 docs/report.md 是说明模板，实际派生报告是 results/summary/report.md。
+默认输出 results/summary；图表在 results/summary/figures。没有原始数据时生成空表和“未测”报告；有数据但未审查时生成审计表，不自动发表数字。docs/report.md 是说明模板，实际派生报告是 results/summary/report.md。
 
 review-template 不自动批准任何结果，且拒绝覆盖已有审查文件。新增实测后按新分组与摘要生成新草稿；不要把数据、配置或文件已改变后的旧审批复制为有效状态。
 
 ## 预算与中断
 
-矩阵累计墙钟写入 results/raw/budget.jsonl。超过 15 小时后先汇报账本；只有明确授权继续时才提高 `--acknowledged-hours`，仍不能超过 `--budget-hours`。不要删除账本重置预算。
+矩阵累计墙钟写入 results/raw/budget.jsonl。累计超过 15 小时时触发确认阈值；核对资源账本后可提高 `--acknowledged-hours`，其值仍不能超过 `--budget-hours`。不要删除账本重置预算。
 
 如果 launcher 被强制杀死，检查该 job 的子进程是否仍运行并核实耗时，然后向账本追加同 job_id 的 `job_finished` 记录（elapsed_s、returncode、outcome），保留原行。这是人工核对步骤，不自动猜测时间。

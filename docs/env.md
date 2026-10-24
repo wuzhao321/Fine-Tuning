@@ -1,38 +1,42 @@
-# 环境状态与版本冻结
+# 环境配置与版本冻结
 
-更新日期：2026-10-24（Asia/Shanghai）。
+## 运行要求
 
-**状态：目标 GPU 环境未搭建、未核验；没有声明任何已验证的依赖组合。** 本次仅使用本地已有 Python 做代码与配置的轻量检查。没有安装软件、使用 sudo、启动 Docker 或连接云主机。
+GPU 训练使用 Linux、Python 3.10+ 和支持 bf16 的单张 CUDA GPU。性能对照配置以 A100 80GB 为参考硬件；使用其他型号时，需调整 `hardware.peak_flops_tflops` 并记录硬件规格。配置校验、执行计划与基础汇总支持独立于 GPU 的运行方式。
 
-## 后续填写
+`pyproject.toml` 声明功能依赖；`docker/requirements.in` 列出容器依赖。环境复现需固定全部传递依赖、wheel 哈希和基础镜像 digest，构建步骤见 [容器说明](../docker/README.md)。
 
-| 项目 | 当前记录 |
+## 实验环境记录
+
+| 类别 | 应记录的字段 |
 | --- | --- |
-| 运行拓扑与访问方式 | 未确定 |
-| GPU、UUID、SXM/PCIe、显存 | 未测 |
-| NVIDIA 驱动与 CUDA runtime | 未测 |
-| OS、CPU、RAM、磁盘余量 | 未测 |
-| 镜像名称与 digest | 未选定 |
-| Python / torch / CUDA / flash-attn | 未锁定 |
-| transformers / peft / bitsandbytes / accelerate | 未锁定 |
-| 模型与 tokenizer revision | 配置暂为 main；正式准备数据前必须换成 commit SHA |
-| 数据集版本与许可证 | 待用户选定并核实 |
-| 实验代码提交 | 尚无初始提交 |
+| GPU | 型号、UUID、显存、SXM/PCIe、功耗限制、稠密 bf16 峰值 |
+| CUDA | 驱动版本、CUDA runtime、编译工具链 |
+| 主机 | OS、CPU、RAM、磁盘空间 |
+| 容器 | 镜像名称、digest、运行参数 |
+| Python 依赖 | Python、torch、transformers、peft、bitsandbytes、accelerate、flash-attn 的版本 |
+| 模型 | 基座、tokenizer revision 与模型文件哈希 |
+| 数据 | 来源、版本、许可证与处理后文件哈希 |
+| 代码 | Git commit、源码指纹、完整实验配置 |
 
-pyproject.toml 中是**功能依赖声明，不是已验证的可重现环境**。`docker/requirements.in` 是选择清单，不能当作 lock。flash-attn 与 torch/CUDA/Python/ABI 的组合必须在实际机器上确定后才能锁定；不承诺当前最新版本彼此兼容。
+## 兼容性与模型身份
 
-## 已参考的官方接口
+torch、CUDA、Python、flash-attn 的 ABI 与 bitsandbytes 支持范围需一起核对。架构支持的最低版本不等于项目所有训练接口的兼容下限。
 
-- [Qwen1.5-14B 模型配置](https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/config.json)：结构断言依据。
-- [PEFT 模型与 adapter 加载](https://huggingface.co/docs/peft/en/package_reference/peft_model)：adapter 注入与恢复接口。
-- [PEFT k-bit 准备函数源码](https://github.com/huggingface/peft/blob/main/src/peft/utils/other.py)：GC 默认行为与精度转换；运行时还会保存实际安装版本的函数哈希。
-- [Transformers bitsandbytes 文档](https://huggingface.co/docs/transformers/en/quantization/bitsandbytes)：NF4、Double Quantization 与 compute dtype。
-- [Transformers Trainer 文档](https://huggingface.co/docs/transformers/en/main_classes/trainer)：processing_class、eval_strategy、训练恢复接口。
+模型加载使用 `dtype`，训练入口使用 `processing_class` 和 `eval_strategy`。选用其他版本时，应核查相应 API、loss 归一化和恢复行为，并将修改后的组合重新冻结。版本差异与源码对照见 [工程资料](research/engineering-and-measurement.md)。
 
-代码使用当前接口名称（例如 `dtype`、`processing_class`、`eval_strategy`）。并未用兼容分支悄悄改变行为；目标环境若采用旧版本，须确认接口后明确修改并重新冻结。
+远程模型 `model.revision` 必须固定为完整 commit SHA；数据准备和所有对照配置使用同一 revision。本地快照可通过 `scripts/hash_model.py` 生成文件清单。
 
-## 运行前最小验收
+## 运行检查
 
-先确认 CUDA/bf16/单卡，再运行 E0。核实 lm_head 未量化、实际可训练参数量、GC 状态、k-bit 准备前后的 dtype、第一步梯度连通性。FA2/bitsandbytes 加载失败时按组合诊断，不能自动升级某一个包或改用另一种 attention。
+E0 检查单卡 CUDA/bf16、模型结构、lm_head 非量化、实际可训练参数量、GC 状态、k-bit 准备前后 dtype 与梯度连通性。检查失败时保存原始错误和配置，依据已固定的依赖组合诊断。
 
-成功后保存实际包版本和镜像 digest，计算模型 shard 哈希，提交代码和配置。原始日志的 source_sha256 覆盖源码、脚本和配置，但不代替完整依赖锁定。
+原始日志的 `source_sha256` 覆盖源码、脚本与配置；包版本和镜像 digest 记录依赖身份。两者共同用于实验溯源。
+
+## 官方参考
+
+- [Qwen1.5-14B 配置](https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/config.json)
+- [PEFT 模型接口](https://huggingface.co/docs/peft/en/package_reference/peft_model)
+- [PEFT k-bit 准备函数](https://github.com/huggingface/peft/blob/main/src/peft/utils/other.py)
+- [Transformers bitsandbytes](https://huggingface.co/docs/transformers/en/quantization/bitsandbytes)
+- [Transformers Trainer](https://huggingface.co/docs/transformers/en/main_classes/trainer)

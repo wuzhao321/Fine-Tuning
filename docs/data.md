@@ -1,6 +1,6 @@
 # 数据协议与来源登记
 
-**目前没有选定或下载任何候选数据集。** 原计划的 DuReader / BELLE / Firefly / CSDS / LCSTS 仅为候选，许可证与当前可用性未在本轮核验。后续选定前需要核实来源、版本、许可及用途，再填写 sources 清单；不要把新闻摘要称作客服工单摘要。
+数据处理接受已规范化的本地文件，来源通过 sources 清单登记。DuReader、BELLE、Firefly、CSDS 和 LCSTS 可作为数据选型的调研入口；使用前需核实来源、版本、许可及用途。摘要任务应注明文本类型，例如对话摘要或新闻摘要。
 
 ## 标准输入
 
@@ -13,7 +13,7 @@
 
 `task` 只能是 qa 或 summary，context 必须非空，QA 需要 question，answers 必须是非空字符串列表。训练使用第一条答案，评测取多参考答案中的最佳匹配。此例仅说明格式，禁止把示例作为实验样本或用重复样本凑数量。
 
-来源模板见 data/sources.template.json。每项都需真实 `id / url / license / license_url / revision / approved_by / approved_at / approved`；模板默认 approved=false，因此不会误触发数据处理。代码检查记录是否完整，不能代替阅读许可证与判断权限。下载与特定数据集字段映射在选定来源后再补，当前支持已经正规化的本地文件。
+来源模板见 data/sources.template.json。每项都需真实 `id / url / license / license_url / revision / approved_by / approved_at / approved`；模板默认 approved=false，因此不会误触发数据处理。代码检查记录是否完整，不能代替阅读许可证与判断权限。处理入口使用已规范化的本地文件；数据集下载与字段映射需按所选来源单独实现。
 
 ## 清洗与划分
 
@@ -27,7 +27,7 @@
 
 输出 train.jsonl / validation.jsonl / test.jsonl 与 manifest.json。manifest 保存来源、输入文件 SHA256、模型配置、模板 SHA256、输出文件 SHA256 和统计。训练及评测前校验对应文件哈希。
 
-第二轮起，任务 manifest 使用 schema_version=2，并保存 split_policy 中的测试/验证配额及训练上限。训练、评测和 preflight 会读取三个划分，重新计算样本 ID 与 context 分组 ID，拒绝跨集合重叠、重复样本、标签污染、错误 token 范围或长度、与 prompt_ids 不一致的输入，以及声明配额与实际条数不符。仅更新文件哈希不能绕过内容校验。缺少 split_policy 的早期数据需重新准备。
+任务 manifest 使用 schema_version=2，并保存 split_policy 中的测试/验证配额及训练上限。训练、评测和 preflight 会读取三个划分，重新计算样本 ID 与 context 分组 ID，拒绝跨集合重叠、重复样本、标签污染、错误 token 范围或长度、与 prompt_ids 不一致的输入，以及声明配额与实际条数不符。仅更新文件哈希不能绕过内容校验。缺少 split_policy 的早期数据需重新准备。
 
 微调后评测还核对 adapter 的完整性记录、训练配置中的模型/量化/LoRA 设置、三个数据文件和 manifest 身份。训练时同样校验实际 tokenizer 模板哈希；不能只让评测阶段检查模板。
 

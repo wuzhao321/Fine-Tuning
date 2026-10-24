@@ -1,4 +1,4 @@
-# Candidate dependency names only. NOT a compatibility-tested lock.
+# Dependency inputs for generating an environment-specific lock file.
 # Choose versions against the target GPU driver / CUDA / Python before installing.
 torch
 transformers

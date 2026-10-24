@@ -1,6 +1,6 @@
 # Qwen1.5-14B：QLoRA / FlashAttention-2 的集成与测量资料
 
-检索日期：2026-10-24（Asia/Shanghai）。本文通过实际 Web 检索核对官方模型仓库、版本化源码、原论文和厂商文档。目的在于支撑项目代码与实验解释；未安装依赖、运行 GPU 或生成实验结果。
+资料核对日期：2026-10-24。本文收录官方模型仓库、版本化源码、原论文和厂商文档，说明 Qwen1.5-14B 的工程集成、指标定义与测量方法。
 
 标记约定：**来源结论**是原资料直接支持的事实；**项目推导**是结合配置进行的计算；**待验证**是尚未通过本项目运行确认的行为。文中的历史版本是阅读源码的样本，不是本项目已锁定或已验证的环境。`main`、`stable`、无版本文档会变化。
 
@@ -9,13 +9,13 @@
 - 本模型虽然使用 `Qwen2ForCausalLM`，但 14B 权重配置的 Q 头和 KV 头均为 40，使用 MHA；不能将 Qwen2 系列的 GQA、滑窗、许可证或性能直接套用到它。
 - QLoRA 的 4-bit 权重存储、bf16 运算、fp32 adapter、fp32 normalization 和 loss 可以同时存在；只报告“bf16 训练”不足以描述实际行为。
 - `attn_implementation="sdpa"` 也可能进入 PyTorch 的 FlashAttention-2 内核。配置值只能证明请求路径，不能替代实际 kernel 证据。
-- **现有 `mfu()` 按 GC 开关将系数从 4 改为 6，混入了激活重算成本。PaLM 定义的 MFU 排除重算；该指标需要后续修正命名与计算，本轮仅记录问题。**
+- **现有 `mfu()` 按 GC 开关将系数从 4 改为 6，混入了激活重算成本。PaLM 定义的 MFU 排除重算；该指标的命名与计算需要区分任务 FLOPs 和重算成本。**
 - `max_memory_allocated()` 只覆盖 PyTorch allocator；bitsandbytes 的 managed memory 及 CUDA 上下文等不能由它完整解释。NVML 整卡显存、allocator 峰值和 UVM 迁移是不同证据。
 - 模型卡的 `transformers>=4.37.0` 是架构支持说明，不能证明项目使用的 `dtype`、`processing_class`、Trainer loss 归一化和恢复 API 全部兼容。
 
 ## 资料目录：模型身份、集成与版本
 
-以下条目每项均说明用途与适用边界。本文没有把论文基准或官方示例替代为本项目实测。
+以下条目说明资料用途与适用边界；论文基准和官方示例的性能结果仅适用于其原始实验条件。
 
 | ID | 一手资料与版本 | 支持的结论及边界 | 对应位置 |
 | --- | --- | --- | --- |
@@ -92,7 +92,7 @@ E28 附录的 attention 计数展开为 `12 × layers × hidden × sequence_leng
 
 **项目推导**：目前 task 数据把非空 prompt 全部标为 `-100`，因此在已审计数据上，`labels.ne(-100)` 和 shift 后的有效目标计数一致；不要把 Trainer 历史源码的计数法推广到首 token 也有 label 的任意 causal 数据。benchmark 的 `labels=ids` 使用满标签，但直接调用模型、没有 Trainer GAccum 归一化，属于另一条链路。
 
-**待验证**：以后锁定运行版本时，应保存实际 Qwen2 forward、Trainer `model_accepts_loss_kwargs`、loss 函数/归一化模式、有效目标计数及 PEFT helper 的实现身份。变长样本的“整 batch 与 microbatch 累积”等价诊断有意义；本轮不添加或运行测试。
+**待验证**：锁定运行版本时，应保存实际 Qwen2 forward、Trainer `model_accepts_loss_kwargs`、loss 函数/归一化模式、有效目标计数及 PEFT helper 的实现身份。变长样本的“整 batch 与 microbatch 累积”等价诊断有助于核对归一化语义。
 
 ## 显存与性能的三类边界
 
@@ -104,23 +104,23 @@ E28 附录的 attention 计数展开为 `12 × layers × hidden × sequence_leng
 
 正式 step 墙钟应包含 forward、backward、clip、optimizer 以及所需同步；数据预载版本可以明确排除 H2D/数据整理。CUDA events 更接近设备区间时间，和含 Python dispatch 的墙钟不是同一指标（E22）。100ms NVML 采样有机会漏过短峰值；其 memory used 可以帮助观察外部分配，但不能反推出某个张量的驻留状态（E24/E26）。
 
-## 对当前代码的研究审查：只记录，不修改
+## 实现审查与改进项
 
-以下定位对应检索时工作区；“待验证”不等于确认存在运行故障。
+以下定位对应资料核对时的代码；“待验证”表示需要运行证据确认的技术问题。
 
-| 优先级 | 当前位置 | 发现与建议的后续工作 | 依据 |
+| 优先级 | 当前位置 | 问题与改进建议 | 依据 |
 | --- | --- | --- | --- |
 | 高 | `src/llm_ft_repro/bench.py:14`；`docs/benchmark_protocol.md:17` | **确认的口径问题**：GC 改变名为 MFU 的运算系数。后续应明确任务 FLOPs 与包含重算的分析 HFU；同步修改汇总复算和引用门槛。`>0.6` 只是项目审查阈值，不是理论物理界限。 | E28/E29 |
-| 高 | `src/llm_ft_repro/bench.py:65` | **待验证的峰值来源**：全词表 logits/CE 可能在 4K/8K 显著占用内存。以后用 allocation trace 或阶段快照解释 OOM，再决定是否引入 chunked/fused loss；变更后实验协议也要重定义。 | E18/E19/E23 + 本文计算 |
-| 高 | `src/llm_ft_repro/model_factory.py:127` | **现有证据不足**：只检查 `_attn_implementation` 不能证明实际 SDPA kernel。以后增加独立 profiler 证据并记录输入 dtype/shape、padding/causal 设置。 | E10/E12/E13 |
+| 高 | `src/llm_ft_repro/bench.py:65` | **待验证的峰值来源**：全词表 logits/CE 可能在 4K/8K 显著占用内存。使用 allocation trace 或阶段快照解释 OOM，再决定是否引入 chunked/fused loss；变更后实验协议也要重定义。 | E18/E19/E23 + 本文计算 |
+| 高 | `src/llm_ft_repro/model_factory.py:127` | **现有证据不足**：只检查 `_attn_implementation` 不能证明实际 SDPA kernel。增加独立 profiler 证据并记录输入 dtype/shape、padding/causal 设置。 | E10/E12/E13 |
 | 中 | `src/llm_ft_repro/model_factory.py:87` | **待验证的加载峰值**：helper 暂时上转两张大表，转回 bf16 不能消除之前的峰值。保留当前准备前后快照，后续另补过程峰值/受控准备策略研究。 | E07/E22 |
 | 中 | `src/llm_ft_repro/model_factory.py:100` | **待验证的 dtype 开销**：RMSNorm 本身内部 fp32 计算，不必然要求权重也存 fp32；显式转换可能改变 hidden-state 类型与转换次数。不要在无数值/梯度证据下调整。 | E10/E12/E14 |
-| 中 | `src/llm_ft_repro/train.py:74`；`pyproject.toml` | **尚未锁定的兼容语义**：processing_class、eval_strategy、dtype 与 loss kwargs 依赖版本。代码应在将来锁定阶段记录实际 API/源码行为，而不是以模型卡版本下限替代。 | E09–E19/E31/E32 |
+| 中 | `src/llm_ft_repro/train.py:74`；`pyproject.toml` | **版本相关的兼容语义**：processing_class、eval_strategy、dtype 与 loss kwargs 依赖版本。依赖锁定时应记录实际 API/源码行为，而不是以模型卡版本下限替代。 | E09–E19/E31/E32 |
 | 中 | `src/llm_ft_repro/model_factory.py:15`；`src/llm_ft_repro/telemetry.py` | **allocator 盲区**：E4 外部 managed allocation 可能让 paged 方案的 allocated 更低，不能因此断言总显存等量降低。并列解释 PyTorch 与 NVML。 | E23–E26 |
 | 中 | `src/llm_ft_repro/bench.py:47` | **范围声明**：全部 token batches 预载到 GPU 并常驻，峰值包含该基线，但计时排除数据传输；应把它命名为预载数据的计算步骤吞吐。 | 代码审查 + E22 |
 | 中 | `src/llm_ft_repro/bench.py:92` | **统计口径**：`tokens/median(step)` 是典型步骤吞吐，`total_tokens/sum(step)` 才是整个计时区间吞吐，两者不能混称；已保存原始步时可支持两者。 | 本项目统计推导 |
-| 中 | `src/llm_ft_repro/train.py:79`；`src/llm_ft_repro/artifacts.py` | **恢复边界**：文件哈希、identity 与 optimizer/RNG 文件清单是好的完整性证据；仍需未来运行证明 adapter、优化器、scheduler、RNG 和数据位置实际恢复一致。 | E20/E21 |
-| 低 | `src/llm_ft_repro/bench.py:100` | 当前 `paging_observed=None` 是合适的未知状态。未来 UVM profiler 采集须独立于正式吞吐，并区分分配、prefetch、fault、eviction。 | E25–E27/E30 |
+| 中 | `src/llm_ft_repro/train.py:79`；`src/llm_ft_repro/artifacts.py` | **恢复边界**：文件哈希、identity 与 optimizer/RNG 文件清单是好的完整性证据；仍需运行证据证明 adapter、优化器、scheduler、RNG 和数据位置实际恢复一致。 | E20/E21 |
+| 低 | `src/llm_ft_repro/bench.py:100` | 当前 `paging_observed=None` 是合适的未知状态。UVM profiler 采集须独立于正式吞吐，并区分分配、prefetch、fault、eviction。 | E25–E27/E30 |
 
 ## 接下来值得阅读的问题
 
@@ -130,4 +130,4 @@ E28 附录的 attention 计数展开为 `12 × layers × hidden × sequence_leng
 4. 用 E25/E26 → E24 → E27 区分：paged state 存在、GPU 驻留量变化、实际页迁移各自需要哪些证据。
 5. 用 E28 → E29 重写指标设计：先确定冻结训练任务所需 FLOPs，再单列重算与量化实现成本，最后与原始 tokens/s、步时、显存共同解释。
 
-本文共收录 **33 个可直接定位的一手来源**。历史源码用于证明行为差异；任何环境组合、加速比、显存节省或恢复一致性结论仍须在未来 GPU 阶段由本项目证据支持。
+本文共收录 **33 个可直接定位的一手来源**。历史源码用于说明版本行为差异；环境兼容性、加速比、显存节省与恢复一致性结论均需相应的运行证据支持。

@@ -1,15 +1,15 @@
 # FlashAttention-2：原理、实现边界与本项目研究笔记
 
-检索日期：2026-10-24（Asia/Shanghai）。本笔记收录 18 项实际检索并阅读的一手资料；研究重点为 A100 上的 Qwen1.5-14B 单卡训练。原论文、历史版本源码和当前官方文档分别标明。`v2.6.3`、`v4.46.3` 是用于定位行为的阅读版本，并非已验证的项目依赖组合。当前项目 `docker/requirements.in` 尚未锁定版本。
+资料核对日期：2026-10-24。本页收录 18 项一手资料，重点为 A100 上的 Qwen1.5-14B 单卡训练。原论文、历史版本源码和当前官方文档分别标明。`v2.6.3`、`v4.46.3` 是用于定位行为的阅读版本，并非已验证的项目依赖组合。`docker/requirements.in` 是依赖声明，实际兼容范围应结合选定版本的锁文件确认。
 
-以下“来源结论”是资料中的陈述；“项目推断 / 建议”来自资料与本地代码的结合，均不代表已有 GPU 实测。
+以下“来源结论”是资料中的陈述；“项目推断 / 建议”来自资料与项目代码的结合，均不代表已有 GPU 实测。
 
 ## 先建立正确的概念
 
 - **FA2 是精确 dense attention 的高效计算方式。** “精确”指没有引入稀疏化或低秩近似；有限精度计算的归约次序改变，不能承诺与 eager 逐位相同。[原论文 F01](https://arxiv.org/pdf/2205.14135)、[SDPA 数值说明 F10](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html)
 - **注意力计算量仍随长度呈二次增长。** 避免保存完整的分数 / 概率矩阵，主要改善中间存储和 IO；不能据此宣称完整训练显存或训练耗时都随长度线性增长。[FA2 正文 F02](https://tridao.me/publications/flash2/flash2.pdf)
 - **`sdpa` 是接口选择，底层会 dispatch。** PyTorch 2.2 已集成 FA2；`sdpa` 与外部 `flash-attn` 路径可能都执行 FlashAttention 算法。[发布说明 F09](https://docs.pytorch.org/blog/pytorch2-2/)
-- **QLoRA 的 4-bit 权重不意味着 4-bit 注意力。** 本地模型工厂配置 NF4 权重、bf16 计算及 autocast；FA2 接收到的 Q/K/V 仍需满足对应实现的 dtype 条件。[FA2 接口 F07](https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/flash_attn/flash_attn_interface.py)、[Qwen 集成 F15](https://github.com/huggingface/transformers/blob/v4.46.3/src/transformers/models/qwen2/modeling_qwen2.py)
+- **QLoRA 的 4-bit 权重不意味着 4-bit 注意力。** 项目模型工厂配置 NF4 权重、bf16 计算及 autocast；FA2 接收到的 Q/K/V 仍需满足对应实现的 dtype 条件。[FA2 接口 F07](https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/flash_attn/flash_attn_interface.py)、[Qwen 集成 F15](https://github.com/huggingface/transformers/blob/v4.46.3/src/transformers/models/qwen2/modeling_qwen2.py)
 
 ## 18 项一手资料与精读入口
 
@@ -75,7 +75,7 @@
 
 **来源结论：** 测试对照高精度参考及 PyTorch 低精度实现，检查输出和梯度误差；部分断言按参考误差的倍数设置边界，而非要求逐位相同。
 
-**项目建议：** 现有 loss 轨迹诊断可以保留；未来内核诊断增加输出、dQ/dK/dV 或 adapter 梯度误差更有解释力。不要把上游测试中的经验倍数照搬成所有模型的统一容差。
+**项目建议：** 现有 loss 轨迹诊断可以保留；内核诊断增加输出、dQ/dK/dV 或 adapter 梯度误差更有解释力。不要把上游测试中的经验倍数照搬成所有模型的统一容差。
 
 ### F09 · PyTorch 2.2 发布说明，2024-01-30
 
@@ -107,7 +107,7 @@
 
 **来源结论：** 展示按后端分别计时、处理 fused kernel 不可用的情况，并用 profiler 观察实际操作。不同输入形状可能有不同速度和支持情况。
 
-**项目建议：** 未来增加独立注意力 microbenchmark：固定 `heads=40, head_dim=128, causal=True, bf16`，逐档扫描长度与 batch，区分 forward、backward 与完整 step。微基准用于解释 E2，不替代训练吞吐结果。
+**项目建议：** 增加独立注意力 microbenchmark：固定 `heads=40, head_dim=128, causal=True, bf16`，逐档扫描长度与 batch，区分 forward、backward 与完整 step。微基准用于解释 E2，不替代训练吞吐结果。
 
 ### F13 · PyTorch activation checkpoint 官方文档，2.5
 
@@ -131,7 +131,7 @@
 
 **来源结论：** 此版本两条路径分别调用 FA helper 与 PyTorch SDPA；SDPA 遇 `output_attentions=True` 回退手工实现。FA2 路径在 Q/K/V 意外变成 fp32 时按 autocast / 量化前 dtype 等信息回转；训练与评估使用不同 attention dropout 参数。
 
-**项目建议：** 本地 RMSNorm / adapter fp32 策略使实际 Q/K/V dtype 值得记录；检查所选安装版本的同名源码，避免把这个历史版本的行为当成当前运行事实。
+**项目建议：** 项目 RMSNorm / adapter fp32 策略使实际 Q/K/V dtype 值得记录；检查所选安装版本的同名源码，避免把这个历史版本的行为当成当前运行事实。
 
 ### F16 · Transformers FA helper 源码，v4.46.3
 
@@ -157,18 +157,18 @@
 
 **项目建议：** 报告 A100 的完整型号、容量、SXM / PCIe、时钟和功耗限制。用“理论 FLOPs 估算的 MFU”描述现有指标，避免等同于 profiler / 硬件计数器测得的利用率。
 
-## 回到本项目：哪些地方已合理，哪些还需要证据
+## 项目实现与证据要求
 
-这里是本地代码审阅结果与研究建议，没有修改训练代码。
+以下对照项目实现与技术资料，列出各项设计的适用边界和证据要求。
 
-| 本地事实 | 研究判断 / 下一步 | 对应资料 |
+| 项目实现 | 研究判断 / 下一步 | 对应资料 |
 | --- | --- | --- |
-| `model_factory.py` 断言 hidden=5120、heads=40、KV heads=40 | head dimension=128；该模型是 MHA，不能把其他 Qwen 型号的 GQA 结论直接套入 | F05、F07；结构数值来自本地代码 |
+| `model_factory.py` 断言 hidden=5120、heads=40、KV heads=40 | head dimension=128；该模型是 MHA，不能把其他 Qwen 型号的 GQA 结论直接套入 | F05、F07；结构数值来自项目代码 |
 | 模型工厂要求请求的 attention 实现与 config 一致 | 继续保留；增加真实 kernel 证据后才能声称后端已确认 | F09、F14、F15 |
 | `bench.py` 用 bf16 autocast，权重可 NF4，norm / adapter 部分 fp32 | 分别记录权重、计算和 Q/K/V dtype；避免把所有张量描述为 4-bit | F07、F15 |
 | E2 包含 eager / sdpa / FA2 × GC | 能比较实际集成路径；要区分算法收益，另需受控后端组 | F09–F12 |
 | 基准 token 数据是拼接流切块，无 padding / position_ids 边界输入 | 适合固定工作量性能对比；不能称为样本隔离 packing 或 padding-free SFT | F16–F17 |
-| SFT collator 输出 padding mask 与 `labels=-100` | padding mask 控制 attention；`-100` 只控制 loss。两者职责不同，未来说明应明确 | F15–F17；collator 行为来自本地代码 |
+| SFT collator 输出 padding mask 与 `labels=-100` | padding mask 控制 attention；`-100` 只控制 loss。两者职责不同，文档应明确 | F15–F17；collator 行为来自项目代码 |
 | `gc.use_reentrant` 由配置控制，reentrant 时启用输入梯度 | 与冻结基座的梯度条件相符；FA2 内部重算不能替代该检查 | F13 |
 | 数值诊断把 LoRA dropout 设为 0 | 再核实模型 attention dropout 实际值为 0；不同路径同随机种子不等于同 dropout mask | F07、F10、F15 |
 | 正式计时覆盖完整 optimizer step，3 个独立进程重复 | 保留端到端口径；microbenchmark、profiler trace、正式训练三种产物分开解释 | F12、F14 |
@@ -193,9 +193,9 @@ FA2 反向依据保存的统计重建局部 attention 概率；decoder GC 则可
 1. **先读 F03 → F01：** 能手算两个分块的最大值、分母合并；画出 eager 保存的 `N×N` 张量与 FA 保存的逐行统计。
 2. **再读 F04 → F02：** 能解释减少非矩阵运算、增加序列并行、sliced-Q 三件事分别改善什么；分清存储复杂度和计算复杂度。
 3. **读 F09 → F10 → F11 → F15：** 写出本项目 eager / SDPA / 外部 FA2 的调用路径，列出自动选择和回退条件。
-4. **读 F05 → F06 → F07：** 形成针对选定 tag 的版本与形状记录，不在研究阶段安装依赖。
+4. **读 F05 → F06 → F07：** 形成针对选定 tag 的版本与形状记录，明确架构、dtype 与输入约束。
 5. **读 F16 → F17：** 给连续流 packing、样本隔离 packing、padding mask 和 loss mask 各画一个短例子。
 6. **读 F08 → F13：** 整理输出 / 梯度容差、dropout 与 GC 条件。有限步 loss 接近仅是模型级诊断证据。
-7. **读 F12 → F14 → F18：** 设计一个独立的内核确认任务，产出少量 trace；运行 GPU 后再填写表格，禁止把文献加速比填入项目结果。
+7. **读 F12 → F14 → F18：** 设计独立的内核确认任务，保存 trace，并依据实际测量记录性能。
 
-优先的文档 / 代码后续任务：在运行元数据中加入真实 attention dropout、Q/K/V dtype 和 attention 类；增加可选的 SDPA 单后端诊断入口；增加单独保存 profiler trace 的方案；明确 benchmark 连续流与 SFT 样本边界的定义。以上均为研究后的建议，本轮没有安装环境或启动 GPU 实验。
+优先的文档与代码改进项：在运行元数据中加入真实 attention dropout、Q/K/V dtype 和 attention 类；增加可选的 SDPA 单后端诊断入口；增加单独保存 profiler trace 的方案；明确 benchmark 连续流与 SFT 样本边界的定义。

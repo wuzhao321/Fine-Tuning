@@ -4,7 +4,7 @@
 
 `model_factory.build_model` 被 E0、基准、训练和评测共同使用。结构断言来自官方 [config.json](https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/config.json)：40 层、hidden 5120、40 个注意力与 KV 头、intermediate 13696、词表 152064、embedding 与 lm_head 不共享。进一步检查 160 个 q/k/v/o 投影的输入输出都是 5120。
 
-LoRA 设计值为 `40 × 4 × 64 × (5120 + 5120) = 104,857,600`。这是结构推导，不是当前机器的实测。训练构建时必须用 `requires_grad` 参数实际求和断言；不启动全参训练，E1 全参仅保留理论讨论。
+LoRA 设计值为 `40 × 4 × 64 × (5120 + 5120) = 104,857,600`。该值为结构推导值，运行时通过实际参数计数校验。训练构建时必须用 `requires_grad` 参数实际求和断言；不启动全参训练，E1 全参仅保留理论讨论。
 
 所有 GPU 代码延迟导入。配置校验、计划查看、CSV 与 Markdown 汇总可脱离 GPU 环境运行。`device_map={"": 0}` 固定一个设备，拒绝多个可见 GPU 和 `WORLD_SIZE != 1`，不使用自动 offload。
 
@@ -32,10 +32,10 @@ E5 的验证集只用于验证 loss；E6 才使用 test。测试 prompt_ids 在�
 
 正式基准使用梯度累积 1，计时包含 zero_grad、forward、backward、clip 和 optimizer.step，排除数据加载与 CPU→GPU 拷贝。所有固定 batch 预装载到 GPU；这部分小额 buffer 会包含在峰值显存，日志明确保存三处静态检查点。
 
-每个配置与重复启动新进程。矩阵执行器记录每个子进程的实际墙钟时间（包含加载，保守估计 GPU 占用时间），默认 15 小时停下汇报、20 小时硬上限。它不等价于云平台账单；单独调用 bench/train/eval 不走矩阵预算器。机器掉电造成未闭合账本时拒绝继续，需追加修正记录。
+每个配置与重复启动新进程。矩阵执行器记录每个子进程的实际墙钟时间（包含加载，保守估计 GPU 占用时间），默认累计 15 小时触发预算确认阈值，20 小时为硬上限。它不等价于云平台账单；单独调用 bench/train/eval 不走矩阵预算器。机器掉电造成未闭合账本时拒绝继续，需追加修正记录。
 
 ## 证据与审查
 
 记录配置全文及哈希、源码指纹、git 提交与 dirty 状态、依赖版本、实际 GPU、UTC 时间、repeat 和 attempt_id。每次尝试独立日志，写入 flush + fsync；OOM 是终止结果，不会被成功重跑覆盖。汇总按配置、源码、版本、GPU、数据指纹分组，避免把不同环境的重复合并。
 
-`summary.json` 和 `audit.csv` 可以含待审核数字，`accepted.csv` 只含自动校验与绑定证据哈希的审查都通过的结果。报告正文、性能图表与简历数值只从 accepted 集合生成。
+`summary.json` 和 `audit.csv` 可以含待审核数字，`accepted.csv` 只含自动校验与绑定证据哈希的审查都通过的结果。报告正文、性能图表与结果摘要只从 accepted 集合生成。

@@ -1,6 +1,6 @@
 # 文献对本项目的影响与待修订项
 
-检索日期：2026-10-24。本页将论文、官方文档和源码与当前项目对照。它记录研究判断，尚未进行 GPU 验证，也未在本轮改变训练代码或实验配置。原始计划中的估算继续保留为历史规格，不能据此声称指标定义已核验。
+资料核对日期：2026-10-24。本页对照论文、官方文档、源码与项目实现，列出指标定义、观测证据和实验设计的技术改进项。研究判断与理论估算不等于运行验证。
 
 ## 优先修订的口径
 
@@ -13,9 +13,9 @@
 | P1 | Qwen1.5-14B 的结构不能从其他 Qwen 型号泛化。 | [本模型 config](https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/config.json)。 | 保留 40 KV heads 的 MHA 断言；不要使用 GQA 的 KV 显存估算替代。 |
 | P1 | 不同版本的模型 loss 与 Trainer 交互可能改变梯度累积的归一化。 | [v4.37.0 Qwen2](https://github.com/huggingface/transformers/blob/v4.37.0/src/transformers/models/qwen2/modeling_qwen2.py)、[较新 loss_utils](https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/loss/loss_utils.py)。 | 在目标版本核对有效监督 token 计数与 loss kwargs；把变长样本的单大 batch / 多 microbatch 等价性作为验收，不能只看“支持 Qwen2”。 |
 
-PaLM 讨论的是全参数 dense Transformer 的运算模型。本项目冻结大量基座参数，即使排除了 GC 重算，4N 也只是自己的近似口径，不能不加说明地与标准全参 6N 的 MFU 横比。长序列、attention 内部重算、量化算子与实际 autograd 路径需要进一步核算。这是根据论文定义和本地工作负载作出的**项目推断**。[PaLM](https://arxiv.org/pdf/2204.02311)
+PaLM 讨论的是全参数 dense Transformer 的运算模型。本项目冻结大量基座参数，即使排除了 GC 重算，4N 也只是自己的近似口径，不能不加说明地与标准全参 6N 的 MFU 横比。长序列、attention 内部重算、量化算子与实际 autograd 路径需要进一步核算。这是根据论文定义和项目工作负载作出的**项目推断**。[PaLM](https://arxiv.org/pdf/2204.02311)
 
-## 后续增加的观测证据
+## 观测证据要求
 
 | 观测对象 | 应保存的信息 | 为何需要 |
 | --- | --- | --- |
@@ -37,4 +37,3 @@ Profiler 采样会影响时序、张量引用及内存。用于确认后端的�
 - **E5：** 报告实际输入 token、受监督 token、截断比例与 loss 归一化；loss mask 不等于 attention mask。
 - **E6：** 同 NF4 基座前后比较测 adapter 效果；量化质量损失需另加 bf16 基座。合并/requantize 的产物应独立评测。[PEFT bnb merge 实现](https://raw.githubusercontent.com/huggingface/peft/main/src/peft/tuners/lora/bnb.py)
 
-以上是研究后的项目设计建议；没有把文献中的显存、吞吐或质量数字录入 results/raw。

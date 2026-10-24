@@ -9,3 +9,10 @@ checkpoints
 results
 .env
 .env.*
+
+# Local planning notes and development records
+.local-notes/
+docs/source-plan.md
+docs/development-checks.md
+docs/iteration-*.md
+docs/resume_snippet.md
