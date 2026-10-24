@@ -1,0 +1,17 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e2_eager_fallback",
+  "experiment": "E2",
+  "description": "Only after eager/no-GC OOM; separate evidence",
+  "role": "benchmark",
+  "attention": {
+    "implementation": "eager"
+  },
+  "gc": {
+    "enabled": false
+  },
+  "data": {
+    "seq_len": 1024,
+    "micro_batch": 1
+  }
+}

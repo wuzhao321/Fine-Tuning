@@ -1,0 +1,10 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e1_bf16_lora",
+  "experiment": "E1",
+  "description": "bf16_lora: FA2 + GC",
+  "role": "benchmark",
+  "quantization": {
+    "enabled": false
+  }
+}

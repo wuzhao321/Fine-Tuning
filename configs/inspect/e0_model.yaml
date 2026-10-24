@@ -1,0 +1,7 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e0_model",
+  "experiment": "E0",
+  "description": "结构、量化和最小前反向检查",
+  "role": "inspect"
+}

@@ -1,0 +1,17 @@
+{
+  "groups": {
+    "REPLACE_WITH_GROUP_KEY": {
+      "evidence_digest": "REPLACE_WITH_EVIDENCE_DIGEST",
+      "decision": "pending",
+      "reviewer": "",
+      "rationale": "",
+      "checks": {
+        "static_memory": {"status": "pending", "evidence": ""},
+        "numerical_equivalence": {"status": "pending", "evidence": ""},
+        "gc_overhead": {"status": "pending", "evidence": ""},
+        "hardware": {"status": "pending", "evidence": ""},
+        "provenance": {"status": "pending", "evidence": ""}
+      }
+    }
+  }
+}

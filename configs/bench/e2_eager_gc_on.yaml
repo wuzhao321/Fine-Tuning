@@ -1,0 +1,13 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e2_eager_gc_on",
+  "experiment": "E2",
+  "description": "Attention × GC ablation",
+  "role": "benchmark",
+  "attention": {
+    "implementation": "eager"
+  },
+  "gc": {
+    "enabled": true
+  }
+}

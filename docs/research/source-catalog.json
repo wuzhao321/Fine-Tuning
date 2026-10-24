@@ -1,0 +1,2110 @@
+{
+  "schema_version": 1,
+  "retrieved_on": "2026-10-24",
+  "timezone": "Asia/Shanghai",
+  "catalog_entry_count": 116,
+  "unique_exact_urls": 111,
+  "canonical_source_count": 107,
+  "scope": "Citation locator index; reading depth is documented in the corresponding topic file.",
+  "normalization": "Merge arXiv abs/html/pdf versions by identifier; merge GitHub raw/blob at same ref; remove query/fragment; preserve distinct API/code versions.",
+  "topic_files": [
+    "qlora.md",
+    "flashattention-2.md",
+    "engineering-and-measurement.md",
+    "related-work-and-learning.md",
+    "data-and-evaluation.md"
+  ],
+  "sources": [
+    {
+      "canonical_url": "https://aclanthology.org/2021.emnlp-main.365",
+      "urls": [
+        "https://aclanthology.org/2021.emnlp-main.365/"
+      ],
+      "labels": [
+        "CSDS 论文"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 10,
+          "label": "CSDS 论文"
+        }
+      ],
+      "id": "S001"
+    },
+    {
+      "canonical_url": "https://aclanthology.org/W04-1013",
+      "urls": [
+        "https://aclanthology.org/W04-1013/"
+      ],
+      "labels": [
+        "ROUGE 原论文"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 13,
+          "label": "ROUGE 原论文"
+        }
+      ],
+      "id": "S002"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/1506.05865",
+      "urls": [
+        "https://arxiv.org/abs/1506.05865"
+      ],
+      "labels": [
+        "LCSTS 论文"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 12,
+          "label": "LCSTS 论文"
+        }
+      ],
+      "id": "S003"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/1604.06174",
+      "urls": [
+        "https://arxiv.org/abs/1604.06174"
+      ],
+      "labels": [
+        "Training Deep Nets with Sublinear Memory Cost，2016"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 31,
+          "label": "Training Deep Nets with Sublinear Memory Cost，2016"
+        }
+      ],
+      "id": "S004"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/1711.05073",
+      "urls": [
+        "https://arxiv.org/abs/1711.05073"
+      ],
+      "labels": [
+        "DuReader 原论文"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 7,
+          "label": "DuReader 原论文"
+        }
+      ],
+      "id": "S005"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/1805.02867",
+      "urls": [
+        "https://arxiv.org/html/1805.02867v2",
+        "https://arxiv.org/pdf/1805.02867"
+      ],
+      "labels": [
+        "Online normalizer calculation for softmax",
+        "Online normalizer calculation for softmax，2018",
+        "在线 softmax"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 34,
+          "label": "Online normalizer calculation for softmax"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 29,
+          "label": "Online normalizer calculation for softmax，2018"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 39,
+          "label": "在线 softmax"
+        }
+      ],
+      "id": "S006"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2106.09685",
+      "urls": [
+        "https://arxiv.org/abs/2106.09685"
+      ],
+      "labels": [
+        "LoRA 原论文，2021"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 20,
+          "label": "LoRA 原论文，2021"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 9,
+          "label": "LoRA 原论文，2021"
+        }
+      ],
+      "id": "S007"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2110.02861",
+      "urls": [
+        "https://arxiv.org/abs/2110.02861"
+      ],
+      "labels": [
+        "8-bit Optimizers 原论文，2021/2022",
+        "8-bit Optimizers，2021"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 21,
+          "label": "8-bit Optimizers 原论文，2021/2022"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 11,
+          "label": "8-bit Optimizers，2021"
+        }
+      ],
+      "id": "S008"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2112.05682",
+      "urls": [
+        "https://arxiv.org/abs/2112.05682"
+      ],
+      "labels": [
+        "Self-attention Does Not Need O(n²) Memory，2021"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 30,
+          "label": "Self-attention Does Not Need O(n²) Memory，2021"
+        }
+      ],
+      "id": "S009"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2204.02311",
+      "urls": [
+        "https://arxiv.org/html/2204.02311v5"
+      ],
+      "labels": [
+        "PaLM 原论文"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 49,
+          "label": "PaLM 原论文"
+        }
+      ],
+      "id": "S010"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2205.14135",
+      "urls": [
+        "https://arxiv.org/pdf/2205.14135"
+      ],
+      "labels": [
+        "F01",
+        "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+        "原论文 F01"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 9,
+          "label": "原论文 F01"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 18,
+          "label": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 189,
+          "label": "F01"
+        }
+      ],
+      "id": "S011"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2208.07339",
+      "urls": [
+        "https://arxiv.org/abs/2208.07339"
+      ],
+      "labels": [
+        "LLM.int8()，2022"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 12,
+          "label": "LLM.int8()，2022"
+        }
+      ],
+      "id": "S012"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2210.17323",
+      "urls": [
+        "https://arxiv.org/abs/2210.17323"
+      ],
+      "labels": [
+        "GPTQ，2022"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 13,
+          "label": "GPTQ，2022"
+        }
+      ],
+      "id": "S013"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2211.10438",
+      "urls": [
+        "https://arxiv.org/abs/2211.10438"
+      ],
+      "labels": [
+        "SmoothQuant，2022"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 15,
+          "label": "SmoothQuant，2022"
+        }
+      ],
+      "id": "S014"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2305.14314",
+      "urls": [
+        "https://arxiv.org/html/2305.14314v1",
+        "https://arxiv.org/html/2305.14314v1#S3"
+      ],
+      "labels": [
+        "QLoRA 原论文，2023",
+        "QLoRA 方法第 3 节",
+        "作者论文第 2–3 节"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 7,
+          "label": "作者论文第 2–3 节"
+        },
+        {
+          "file": "qlora.md",
+          "line": 19,
+          "label": "QLoRA 原论文，2023"
+        },
+        {
+          "file": "qlora.md",
+          "line": 53,
+          "label": "QLoRA 方法第 3 节"
+        }
+      ],
+      "id": "S015"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2306.00978",
+      "urls": [
+        "https://arxiv.org/abs/2306.00978"
+      ],
+      "labels": [
+        "AWQ，2023"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 14,
+          "label": "AWQ，2023"
+        }
+      ],
+      "id": "S016"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2306.06965",
+      "urls": [
+        "https://arxiv.org/html/2306.06965v1"
+      ],
+      "labels": [
+        "NF4 Isn't Information Theoretically Optimal (and that's Good)，2023",
+        "NF4 理论边界论文"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 22,
+          "label": "NF4 Isn't Information Theoretically Optimal (and that's Good)，2023"
+        },
+        {
+          "file": "qlora.md",
+          "line": 49,
+          "label": "NF4 理论边界论文"
+        }
+      ],
+      "id": "S017"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2309.16609",
+      "urls": [
+        "https://arxiv.org/abs/2309.16609"
+      ],
+      "labels": [
+        "Qwen Technical Report"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 25,
+          "label": "Qwen Technical Report"
+        }
+      ],
+      "id": "S018"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2310.08659",
+      "urls": [
+        "https://arxiv.org/abs/2310.08659"
+      ],
+      "labels": [
+        "LoftQ 原论文",
+        "LoftQ 摘要",
+        "LoftQ，2023"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 42,
+          "label": "LoftQ 原论文"
+        },
+        {
+          "file": "qlora.md",
+          "line": 114,
+          "label": "LoftQ 摘要"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 16,
+          "label": "LoftQ，2023"
+        }
+      ],
+      "id": "S019"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2311.12023",
+      "urls": [
+        "https://arxiv.org/abs/2311.12023"
+      ],
+      "labels": [
+        "LQ-LoRA，2023"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 17,
+          "label": "LQ-LoRA，2023"
+        }
+      ],
+      "id": "S020"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2312.03732",
+      "urls": [
+        "https://arxiv.org/abs/2312.03732"
+      ],
+      "labels": [
+        "rsLoRA，2023"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 18,
+          "label": "rsLoRA，2023"
+        }
+      ],
+      "id": "S021"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2402.09353",
+      "urls": [
+        "https://arxiv.org/abs/2402.09353"
+      ],
+      "labels": [
+        "DoRA，2024"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 19,
+          "label": "DoRA，2024"
+        }
+      ],
+      "id": "S022"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2402.12354",
+      "urls": [
+        "https://arxiv.org/abs/2402.12354"
+      ],
+      "labels": [
+        "LoRA+，2024"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 21,
+          "label": "LoRA+，2024"
+        }
+      ],
+      "id": "S023"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2404.02948",
+      "urls": [
+        "https://arxiv.org/abs/2404.02948"
+      ],
+      "labels": [
+        "PiSSA，2024"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 20,
+          "label": "PiSSA，2024"
+        }
+      ],
+      "id": "S024"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2407.08608",
+      "urls": [
+        "https://arxiv.org/abs/2407.08608"
+      ],
+      "labels": [
+        "FlashAttention-3，2024"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 52,
+          "label": "FlashAttention-3，2024"
+        }
+      ],
+      "id": "S025"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2407.10671",
+      "urls": [
+        "https://arxiv.org/abs/2407.10671"
+      ],
+      "labels": [
+        "Qwen2 Technical Report"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 26,
+          "label": "Qwen2 Technical Report"
+        }
+      ],
+      "id": "S026"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2410.10989",
+      "urls": [
+        "https://arxiv.org/abs/2410.10989"
+      ],
+      "labels": [
+        "Liger Kernel，2024"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 54,
+          "label": "Liger Kernel，2024"
+        }
+      ],
+      "id": "S027"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2411.09009",
+      "urls": [
+        "https://arxiv.org/abs/2411.09009"
+      ],
+      "labels": [
+        "CCE",
+        "Cut Your Losses，2024"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 56,
+          "label": "Cut Your Losses，2024"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 59,
+          "label": "CCE"
+        }
+      ],
+      "id": "S028"
+    },
+    {
+      "canonical_url": "https://arxiv.org/abs/2603.05451",
+      "urls": [
+        "https://arxiv.org/abs/2603.05451"
+      ],
+      "labels": [
+        "FlashAttention-4，2026"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 53,
+          "label": "FlashAttention-4，2026"
+        }
+      ],
+      "id": "S029"
+    },
+    {
+      "canonical_url": "https://crfm.stanford.edu/2023/07/17/flash2.html",
+      "urls": [
+        "https://crfm.stanford.edu/2023/07/17/flash2.html"
+      ],
+      "labels": [
+        "Tri Dao / Stanford CRFM: FlashAttention-2"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 42,
+          "label": "Tri Dao / Stanford CRFM: FlashAttention-2"
+        }
+      ],
+      "id": "S030"
+    },
+    {
+      "canonical_url": "https://cs336.stanford.edu/spring2025",
+      "urls": [
+        "https://cs336.stanford.edu/spring2025/"
+      ],
+      "labels": [
+        "Stanford CS336 Spring 2025"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 45,
+          "label": "Stanford CS336 Spring 2025"
+        }
+      ],
+      "id": "S031"
+    },
+    {
+      "canonical_url": "https://developer.nvidia.com/blog/nvidia-ampere-architecture-in-depth",
+      "urls": [
+        "https://developer.nvidia.com/blog/nvidia-ampere-architecture-in-depth/"
+      ],
+      "labels": [
+        "NVIDIA Ampere Architecture In-Depth"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 50,
+          "label": "NVIDIA Ampere Architecture In-Depth"
+        }
+      ],
+      "id": "S032"
+    },
+    {
+      "canonical_url": "https://docs.nvidia.com/cuda/ampere-tuning-guide/index.html",
+      "urls": [
+        "https://docs.nvidia.com/cuda/ampere-tuning-guide/index.html"
+      ],
+      "labels": [
+        "NVIDIA Ampere Tuning Guide"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 36,
+          "label": "NVIDIA Ampere Tuning Guide"
+        }
+      ],
+      "id": "S033"
+    },
+    {
+      "canonical_url": "https://docs.nvidia.com/deeplearning/performance/dl-performance-gpu-background/index.html",
+      "urls": [
+        "https://docs.nvidia.com/deeplearning/performance/dl-performance-gpu-background/index.html"
+      ],
+      "labels": [
+        "GPU Performance Background User's Guide"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 154,
+          "label": "GPU Performance Background User's Guide"
+        }
+      ],
+      "id": "S034"
+    },
+    {
+      "canonical_url": "https://docs.nvidia.com/deploy/nvml-api/latest/api/group__nvmlDeviceQueries.html",
+      "urls": [
+        "https://docs.nvidia.com/deploy/nvml-api/latest/api/group__nvmlDeviceQueries.html"
+      ],
+      "labels": [
+        "NVML Device Queries"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 45,
+          "label": "NVML Device Queries"
+        }
+      ],
+      "id": "S035"
+    },
+    {
+      "canonical_url": "https://docs.nvidia.com/nsight-systems/UserGuide",
+      "urls": [
+        "https://docs.nvidia.com/nsight-systems/UserGuide/"
+      ],
+      "labels": [
+        "Nsight Systems User Guide"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 48,
+          "label": "Nsight Systems User Guide"
+        }
+      ],
+      "id": "S036"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/blog/pytorch2-2",
+      "urls": [
+        "https://docs.pytorch.org/blog/pytorch2-2/"
+      ],
+      "labels": [
+        "PyTorch 2.2: FlashAttention-v2 integration, AOTInductor",
+        "发布说明 F09"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 11,
+          "label": "发布说明 F09"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 82,
+          "label": "PyTorch 2.2: FlashAttention-v2 integration, AOTInductor"
+        }
+      ],
+      "id": "S037"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.attention.sdpa_kernel.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.14/generated/torch.nn.attention.sdpa_kernel.html"
+      ],
+      "labels": [
+        "torch.nn.attention.sdpa_kernel"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 98,
+          "label": "torch.nn.attention.sdpa_kernel"
+        }
+      ],
+      "id": "S038"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html"
+      ],
+      "labels": [
+        "F10",
+        "SDPA 数值说明 F10",
+        "scaled_dot_product_attention"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 9,
+          "label": "SDPA 数值说明 F10"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 90,
+          "label": "scaled_dot_product_attention"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 181,
+          "label": "F10"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 185,
+          "label": "F10"
+        }
+      ],
+      "id": "S039"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.14/notes/autograd.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.14/notes/autograd.html"
+      ],
+      "labels": [
+        "PyTorch Autograd mechanics"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 37,
+          "label": "PyTorch Autograd mechanics"
+        }
+      ],
+      "id": "S040"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.14/profiler.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.14/profiler.html"
+      ],
+      "labels": [
+        "torch.profiler"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 122,
+          "label": "torch.profiler"
+        }
+      ],
+      "id": "S041"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.5/checkpoint.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.5/checkpoint.html"
+      ],
+      "labels": [
+        "F13",
+        "torch.utils.checkpoint"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 114,
+          "label": "torch.utils.checkpoint"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 189,
+          "label": "F13"
+        }
+      ],
+      "id": "S042"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.9/amp.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.9/amp.html"
+      ],
+      "labels": [
+        "torch.amp"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 35,
+          "label": "torch.amp"
+        }
+      ],
+      "id": "S043"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.9/checkpoint.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.9/checkpoint.html"
+      ],
+      "labels": [
+        "torch.utils.checkpoint"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 29,
+          "label": "torch.utils.checkpoint"
+        }
+      ],
+      "id": "S044"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.9/generated/torch.nn.functional.scaled_dot_product_attention.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.9/generated/torch.nn.functional.scaled_dot_product_attention.html"
+      ],
+      "labels": [
+        "PyTorch scaled_dot_product_attention"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 34,
+          "label": "PyTorch scaled_dot_product_attention"
+        }
+      ],
+      "id": "S045"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.9/notes/cuda.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.9/notes/cuda.html"
+      ],
+      "labels": [
+        "CUDA semantics"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 43,
+          "label": "CUDA semantics"
+        }
+      ],
+      "id": "S046"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/docs/2.9/torch_cuda_memory.html",
+      "urls": [
+        "https://docs.pytorch.org/docs/2.9/torch_cuda_memory.html"
+      ],
+      "labels": [
+        "Understanding CUDA Memory Usage"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 44,
+          "label": "Understanding CUDA Memory Usage"
+        }
+      ],
+      "id": "S047"
+    },
+    {
+      "canonical_url": "https://docs.pytorch.org/tutorials/intermediate/scaled_dot_product_attention_tutorial.html",
+      "urls": [
+        "https://docs.pytorch.org/tutorials/intermediate/scaled_dot_product_attention_tutorial.html"
+      ],
+      "labels": [
+        "Implementing High-Performance Transformers with SDPA"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 106,
+          "label": "Implementing High-Performance Transformers with SDPA"
+        }
+      ],
+      "id": "S048"
+    },
+    {
+      "canonical_url": "https://github.com/Dao-AILab/flash-attention/blob/main/README.md",
+      "urls": [
+        "https://github.com/Dao-AILab/flash-attention/blob/main/README.md"
+      ],
+      "labels": [
+        "Dao-AILab / flash-attention main README"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 58,
+          "label": "Dao-AILab / flash-attention main README"
+        }
+      ],
+      "id": "S049"
+    },
+    {
+      "canonical_url": "https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/README.md",
+      "urls": [
+        "https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/README.md"
+      ],
+      "labels": [
+        "Dao-AILab / flash-attention v2.6.3 README",
+        "F05"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 50,
+          "label": "Dao-AILab / flash-attention v2.6.3 README"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 185,
+          "label": "F05"
+        }
+      ],
+      "id": "S050"
+    },
+    {
+      "canonical_url": "https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/flash_attn/flash_attn_interface.py",
+      "urls": [
+        "https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/flash_attn/flash_attn_interface.py"
+      ],
+      "labels": [
+        "F07",
+        "FA2 接口 F07",
+        "flash_attn_interface.py"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 12,
+          "label": "FA2 接口 F07"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 66,
+          "label": "flash_attn_interface.py"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 181,
+          "label": "F07"
+        }
+      ],
+      "id": "S051"
+    },
+    {
+      "canonical_url": "https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/tests/test_flash_attn.py",
+      "urls": [
+        "https://github.com/Dao-AILab/flash-attention/blob/v2.6.3/tests/test_flash_attn.py"
+      ],
+      "labels": [
+        "tests/test_flash_attn.py"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 74,
+          "label": "tests/test_flash_attn.py"
+        }
+      ],
+      "id": "S052"
+    },
+    {
+      "canonical_url": "https://github.com/apple-aiml-research/ml-cross-entropy",
+      "urls": [
+        "https://github.com/apple-aiml-research/ml-cross-entropy"
+      ],
+      "labels": [
+        "Apple CCE 官方实现"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 57,
+          "label": "Apple CCE 官方实现"
+        }
+      ],
+      "id": "S053"
+    },
+    {
+      "canonical_url": "https://github.com/artidoro/qlora",
+      "urls": [
+        "https://github.com/artidoro/qlora"
+      ],
+      "labels": [
+        "作者 QLoRA 仓库"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 23,
+          "label": "作者 QLoRA 仓库"
+        }
+      ],
+      "id": "S054"
+    },
+    {
+      "canonical_url": "https://github.com/artidoro/qlora/blob/main/qlora.py",
+      "urls": [
+        "https://raw.githubusercontent.com/artidoro/qlora/main/qlora.py"
+      ],
+      "labels": [
+        "作者 `qlora.py`"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 24,
+          "label": "作者 `qlora.py`"
+        }
+      ],
+      "id": "S055"
+    },
+    {
+      "canonical_url": "https://github.com/baidu/DuReader",
+      "urls": [
+        "https://github.com/baidu/DuReader"
+      ],
+      "labels": [
+        "DuReader 官方仓库"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 8,
+          "label": "DuReader 官方仓库"
+        }
+      ],
+      "id": "S056"
+    },
+    {
+      "canonical_url": "https://github.com/baidu/DuReader/blob/master/DuReader-2.0/README.md",
+      "urls": [
+        "https://github.com/baidu/DuReader/blob/master/DuReader-2.0/README.md?plain=1"
+      ],
+      "labels": [
+        "DuReader 2.0 官方说明"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 9,
+          "label": "DuReader 2.0 官方说明"
+        }
+      ],
+      "id": "S057"
+    },
+    {
+      "canonical_url": "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/0.43.3/bitsandbytes/autograd/_functions.py",
+      "urls": [
+        "https://raw.githubusercontent.com/bitsandbytes-foundation/bitsandbytes/0.43.3/bitsandbytes/autograd/_functions.py"
+      ],
+      "labels": [
+        "bitsandbytes 0.43.3 `MatMul4Bit`",
+        "历史实现"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 33,
+          "label": "bitsandbytes 0.43.3 `MatMul4Bit`"
+        },
+        {
+          "file": "qlora.md",
+          "line": 83,
+          "label": "历史实现"
+        }
+      ],
+      "id": "S058"
+    },
+    {
+      "canonical_url": "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/main/bitsandbytes/autograd/_functions.py",
+      "urls": [
+        "https://raw.githubusercontent.com/bitsandbytes-foundation/bitsandbytes/main/bitsandbytes/autograd/_functions.py"
+      ],
+      "labels": [
+        "bitsandbytes main `MatMul4Bit`",
+        "当前 autograd 源码"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 34,
+          "label": "bitsandbytes main `MatMul4Bit`"
+        },
+        {
+          "file": "qlora.md",
+          "line": 65,
+          "label": "当前 autograd 源码"
+        }
+      ],
+      "id": "S059"
+    },
+    {
+      "canonical_url": "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/main/bitsandbytes/backends/cuda/ops.py",
+      "urls": [
+        "https://raw.githubusercontent.com/bitsandbytes-foundation/bitsandbytes/main/bitsandbytes/backends/cuda/ops.py"
+      ],
+      "labels": [
+        "bitsandbytes CUDA backend",
+        "当前分派"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 43,
+          "label": "bitsandbytes CUDA backend"
+        },
+        {
+          "file": "qlora.md",
+          "line": 83,
+          "label": "当前分派"
+        }
+      ],
+      "id": "S060"
+    },
+    {
+      "canonical_url": "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/main/bitsandbytes/functional.py",
+      "urls": [
+        "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/main/bitsandbytes/functional.py",
+        "https://raw.githubusercontent.com/bitsandbytes-foundation/bitsandbytes/main/bitsandbytes/functional.py"
+      ],
+      "labels": [
+        "bitsandbytes `functional.py`",
+        "bitsandbytes functional.py",
+        "bitsandbytes 量化源码",
+        "get_paged 源码"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 32,
+          "label": "bitsandbytes `functional.py`"
+        },
+        {
+          "file": "qlora.md",
+          "line": 51,
+          "label": "bitsandbytes 量化源码"
+        },
+        {
+          "file": "qlora.md",
+          "line": 105,
+          "label": "get_paged 源码"
+        },
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 47,
+          "label": "bitsandbytes functional.py"
+        }
+      ],
+      "id": "S061"
+    },
+    {
+      "canonical_url": "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/main/bitsandbytes/optim/optimizer.py",
+      "urls": [
+        "https://github.com/bitsandbytes-foundation/bitsandbytes/blob/main/bitsandbytes/optim/optimizer.py",
+        "https://raw.githubusercontent.com/bitsandbytes-foundation/bitsandbytes/main/bitsandbytes/optim/optimizer.py"
+      ],
+      "labels": [
+        "bitsandbytes `optim/optimizer.py`",
+        "bitsandbytes optimizer.py",
+        "状态分配源码",
+        "状态初始化与托管分配源码"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 37,
+          "label": "bitsandbytes `optim/optimizer.py`"
+        },
+        {
+          "file": "qlora.md",
+          "line": 77,
+          "label": "状态分配源码"
+        },
+        {
+          "file": "qlora.md",
+          "line": 105,
+          "label": "状态初始化与托管分配源码"
+        },
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 46,
+          "label": "bitsandbytes optimizer.py"
+        }
+      ],
+      "id": "S062"
+    },
+    {
+      "canonical_url": "https://github.com/fxsjy/jieba",
+      "urls": [
+        "https://github.com/fxsjy/jieba"
+      ],
+      "labels": [
+        "jieba 官方仓库"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 15,
+          "label": "jieba 官方仓库"
+        }
+      ],
+      "id": "S063"
+    },
+    {
+      "canonical_url": "https://github.com/google-research/google-research/tree/master/rouge",
+      "urls": [
+        "https://github.com/google-research/google-research/tree/master/rouge"
+      ],
+      "labels": [
+        "Google rouge-score 实现"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 14,
+          "label": "Google rouge-score 实现"
+        }
+      ],
+      "id": "S064"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/peft/blob/main/src/peft/tuners/lora/bnb.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/peft/main/src/peft/tuners/lora/bnb.py"
+      ],
+      "labels": [
+        "PEFT LoRA/bnb 实现",
+        "PEFT merge 源码"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 38,
+          "label": "PEFT LoRA/bnb 实现"
+        },
+        {
+          "file": "qlora.md",
+          "line": 113,
+          "label": "PEFT merge 源码"
+        }
+      ],
+      "id": "S065"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/peft/blob/main/src/peft/utils/other.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/peft/main/src/peft/utils/other.py"
+      ],
+      "labels": [
+        "PEFT `utils/other.py`",
+        "PEFT helper 源码"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 29,
+          "label": "PEFT `utils/other.py`"
+        },
+        {
+          "file": "qlora.md",
+          "line": 71,
+          "label": "PEFT helper 源码"
+        }
+      ],
+      "id": "S066"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/peft/blob/v0.17.1/src/peft/utils/other.py",
+      "urls": [
+        "https://github.com/huggingface/peft/blob/v0.17.1/src/peft/utils/other.py"
+      ],
+      "labels": [
+        "PEFT k-bit 准备函数源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 28,
+          "label": "PEFT k-bit 准备函数源码"
+        }
+      ],
+      "id": "S067"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/peft/releases/tag/v0.18.0",
+      "urls": [
+        "https://github.com/huggingface/peft/releases/tag/v0.18.0"
+      ],
+      "labels": [
+        "PEFT v0.18.0 release"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 53,
+          "label": "PEFT v0.18.0 release"
+        }
+      ],
+      "id": "S068"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/main/src/transformers/quantizers/quantizer_bnb_4bit.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/transformers/main/src/transformers/quantizers/quantizer_bnb_4bit.py"
+      ],
+      "labels": [
+        "Transformers 4-bit quantizer"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 39,
+          "label": "Transformers 4-bit quantizer"
+        }
+      ],
+      "id": "S069"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.37.0/src/transformers/models/qwen2/modeling_qwen2.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/transformers/v4.37.0/src/transformers/models/qwen2/modeling_qwen2.py"
+      ],
+      "labels": [
+        "Qwen2 模型源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 30,
+          "label": "Qwen2 模型源码"
+        }
+      ],
+      "id": "S070"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.46.3/src/transformers/modeling_flash_attention_utils.py",
+      "urls": [
+        "https://github.com/huggingface/transformers/blob/v4.46.3/src/transformers/modeling_flash_attention_utils.py"
+      ],
+      "labels": [
+        "F16",
+        "modeling_flash_attention_utils.py"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 138,
+          "label": "modeling_flash_attention_utils.py"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 185,
+          "label": "F16"
+        }
+      ],
+      "id": "S071"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.46.3/src/transformers/models/qwen2/modeling_qwen2.py",
+      "urls": [
+        "https://github.com/huggingface/transformers/blob/v4.46.3/src/transformers/models/qwen2/modeling_qwen2.py"
+      ],
+      "labels": [
+        "F15",
+        "Qwen 集成 F15",
+        "modeling_qwen2.py"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 12,
+          "label": "Qwen 集成 F15"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 130,
+          "label": "modeling_qwen2.py"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 181,
+          "label": "F15"
+        }
+      ],
+      "id": "S072"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/integrations/flash_attention.py",
+      "urls": [
+        "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/integrations/flash_attention.py"
+      ],
+      "labels": [
+        "Transformers FA2 适配源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 33,
+          "label": "Transformers FA2 适配源码"
+        }
+      ],
+      "id": "S073"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/loss/loss_utils.py",
+      "urls": [
+        "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/loss/loss_utils.py"
+      ],
+      "labels": [
+        "loss_utils 源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 39,
+          "label": "loss_utils 源码"
+        }
+      ],
+      "id": "S074"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/modeling_utils.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/transformers/v4.57.1/src/transformers/modeling_utils.py"
+      ],
+      "labels": [
+        "Transformers modeling_utils"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 52,
+          "label": "Transformers modeling_utils"
+        }
+      ],
+      "id": "S075"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/qwen2/modeling_qwen2.py",
+      "urls": [
+        "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/qwen2/modeling_qwen2.py"
+      ],
+      "labels": [
+        "Qwen2 模型源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 31,
+          "label": "Qwen2 模型源码"
+        }
+      ],
+      "id": "S076"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/trainer.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/transformers/v4.57.1/src/transformers/trainer.py"
+      ],
+      "labels": [
+        "Trainer 源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 37,
+          "label": "Trainer 源码"
+        }
+      ],
+      "id": "S077"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v5.0.0/src/transformers/loss/loss_utils.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/transformers/v5.0.0/src/transformers/loss/loss_utils.py"
+      ],
+      "labels": [
+        "loss_utils 源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 40,
+          "label": "loss_utils 源码"
+        }
+      ],
+      "id": "S078"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v5.0.0/src/transformers/models/qwen2/modeling_qwen2.py",
+      "urls": [
+        "https://github.com/huggingface/transformers/blob/v5.0.0/src/transformers/models/qwen2/modeling_qwen2.py"
+      ],
+      "labels": [
+        "Qwen2 模型源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 32,
+          "label": "Qwen2 模型源码"
+        }
+      ],
+      "id": "S079"
+    },
+    {
+      "canonical_url": "https://github.com/huggingface/transformers/blob/v5.0.0/src/transformers/trainer.py",
+      "urls": [
+        "https://raw.githubusercontent.com/huggingface/transformers/v5.0.0/src/transformers/trainer.py"
+      ],
+      "labels": [
+        "Trainer 源码"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 38,
+          "label": "Trainer 源码"
+        }
+      ],
+      "id": "S080"
+    },
+    {
+      "canonical_url": "https://github.com/linkedin/Liger-Kernel",
+      "urls": [
+        "https://github.com/linkedin/Liger-Kernel"
+      ],
+      "labels": [
+        "Liger 官方实现",
+        "Liger 实现"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 55,
+          "label": "Liger 官方实现"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 59,
+          "label": "Liger 实现"
+        }
+      ],
+      "id": "S081"
+    },
+    {
+      "canonical_url": "https://github.com/microsoft/LoRA",
+      "urls": [
+        "https://github.com/microsoft/LoRA"
+      ],
+      "labels": [
+        "Microsoft loralib"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 10,
+          "label": "Microsoft loralib"
+        }
+      ],
+      "id": "S082"
+    },
+    {
+      "canonical_url": "https://github.com/stanford-cs336/assignment2-systems",
+      "urls": [
+        "https://github.com/stanford-cs336/assignment2-systems"
+      ],
+      "labels": [
+        "CS336 Assignment 2 官方仓库"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 46,
+          "label": "CS336 Assignment 2 官方仓库"
+        }
+      ],
+      "id": "S083"
+    },
+    {
+      "canonical_url": "https://github.com/xiaolinAndy/CSDS",
+      "urls": [
+        "https://github.com/xiaolinAndy/CSDS"
+      ],
+      "labels": [
+        "CSDS 官方仓库"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 11,
+          "label": "CSDS 官方仓库"
+        }
+      ],
+      "id": "S084"
+    },
+    {
+      "canonical_url": "https://huggingface.co/Qwen/Qwen1.5-14B",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen1.5-14B"
+      ],
+      "labels": [
+        "Qwen1.5-14B 模型卡"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 23,
+          "label": "Qwen1.5-14B 模型卡"
+        }
+      ],
+      "id": "S085"
+    },
+    {
+      "canonical_url": "https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/LICENSE",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/LICENSE"
+      ],
+      "labels": [
+        "Qwen1.5-14B LICENSE"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 27,
+          "label": "Qwen1.5-14B LICENSE"
+        }
+      ],
+      "id": "S086"
+    },
+    {
+      "canonical_url": "https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/config.json",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen1.5-14B/blob/main/config.json"
+      ],
+      "labels": [
+        "Qwen1.5-14B config.json"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 22,
+          "label": "Qwen1.5-14B config.json"
+        }
+      ],
+      "id": "S087"
+    },
+    {
+      "canonical_url": "https://huggingface.co/blog/4bit-transformers-bitsandbytes",
+      "urls": [
+        "https://huggingface.co/blog/4bit-transformers-bitsandbytes"
+      ],
+      "labels": [
+        "Hugging Face 联合发布文章"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 25,
+          "label": "Hugging Face 联合发布文章"
+        }
+      ],
+      "id": "S088"
+    },
+    {
+      "canonical_url": "https://huggingface.co/blog/gradient_accumulation",
+      "urls": [
+        "https://huggingface.co/blog/gradient_accumulation"
+      ],
+      "labels": [
+        "Fixing Gradient Accumulation"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 36,
+          "label": "Fixing Gradient Accumulation"
+        }
+      ],
+      "id": "S089"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/bitsandbytes/en/explanations/optimizers",
+      "urls": [
+        "https://huggingface.co/docs/bitsandbytes/en/explanations/optimizers"
+      ],
+      "labels": [
+        "bitsandbytes 8-bit optimizers 解释",
+        "bitsandbytes 优化器原理",
+        "bitsandbytes 优化器说明"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 11,
+          "label": "bitsandbytes 优化器说明"
+        },
+        {
+          "file": "qlora.md",
+          "line": 36,
+          "label": "bitsandbytes 优化器原理"
+        },
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 51,
+          "label": "bitsandbytes 8-bit optimizers 解释"
+        }
+      ],
+      "id": "S090"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/bitsandbytes/en/fsdp_qlora",
+      "urls": [
+        "https://huggingface.co/docs/bitsandbytes/en/fsdp_qlora"
+      ],
+      "labels": [
+        "bitsandbytes FSDP-QLoRA"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 41,
+          "label": "bitsandbytes FSDP-QLoRA"
+        }
+      ],
+      "id": "S091"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/bitsandbytes/en/reference/nn/linear4bit",
+      "urls": [
+        "https://huggingface.co/docs/bitsandbytes/en/reference/nn/linear4bit"
+      ],
+      "labels": [
+        "bitsandbytes Linear4bit API"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 31,
+          "label": "bitsandbytes Linear4bit API"
+        }
+      ],
+      "id": "S092"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/bitsandbytes/en/reference/optim/adamw",
+      "urls": [
+        "https://huggingface.co/docs/bitsandbytes/en/reference/optim/adamw"
+      ],
+      "labels": [
+        "AdamW API",
+        "bitsandbytes AdamW API"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 35,
+          "label": "bitsandbytes AdamW API"
+        },
+        {
+          "file": "qlora.md",
+          "line": 77,
+          "label": "AdamW API"
+        }
+      ],
+      "id": "S093"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/peft/en/developer_guides/checkpoint",
+      "urls": [
+        "https://huggingface.co/docs/peft/en/developer_guides/checkpoint"
+      ],
+      "labels": [
+        "PEFT checkpoint format",
+        "PEFT checkpoint 格式"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 40,
+          "label": "PEFT checkpoint 格式"
+        },
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 42,
+          "label": "PEFT checkpoint format"
+        }
+      ],
+      "id": "S094"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/peft/en/developer_guides/quantization",
+      "urls": [
+        "https://huggingface.co/docs/peft/en/developer_guides/quantization"
+      ],
+      "labels": [
+        "PEFT 量化指南"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 27,
+          "label": "PEFT 量化指南"
+        }
+      ],
+      "id": "S095"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/peft/en/developer_guides/troubleshooting",
+      "urls": [
+        "https://huggingface.co/docs/peft/en/developer_guides/troubleshooting"
+      ],
+      "labels": [
+        "PEFT dtype troubleshooting",
+        "PEFT dtype 文档",
+        "PEFT troubleshooting"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 9,
+          "label": "PEFT dtype 文档"
+        },
+        {
+          "file": "qlora.md",
+          "line": 30,
+          "label": "PEFT troubleshooting"
+        },
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 54,
+          "label": "PEFT dtype troubleshooting"
+        }
+      ],
+      "id": "S096"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/peft/v0.21.0/package_reference/lora",
+      "urls": [
+        "https://huggingface.co/docs/peft/v0.21.0/package_reference/lora"
+      ],
+      "labels": [
+        "LoRA 初始化说明",
+        "PEFT LoRA 参考文档 v0.21.0",
+        "官方 QLoRA-style 说明"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 28,
+          "label": "PEFT LoRA 参考文档 v0.21.0"
+        },
+        {
+          "file": "qlora.md",
+          "line": 67,
+          "label": "LoRA 初始化说明"
+        },
+        {
+          "file": "qlora.md",
+          "line": 109,
+          "label": "官方 QLoRA-style 说明"
+        }
+      ],
+      "id": "S097"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/transformers/attention_interface",
+      "urls": [
+        "https://huggingface.co/docs/transformers/attention_interface"
+      ],
+      "labels": [
+        "Attention backends"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 146,
+          "label": "Attention backends"
+        }
+      ],
+      "id": "S098"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/transformers/en/main_classes/trainer",
+      "urls": [
+        "https://huggingface.co/docs/transformers/en/main_classes/trainer"
+      ],
+      "labels": [
+        "Trainer 文档"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 41,
+          "label": "Trainer 文档"
+        }
+      ],
+      "id": "S099"
+    },
+    {
+      "canonical_url": "https://huggingface.co/docs/transformers/en/quantization/bitsandbytes",
+      "urls": [
+        "https://huggingface.co/docs/transformers/en/quantization/bitsandbytes"
+      ],
+      "labels": [
+        "Transformers bitsandbytes 文档"
+      ],
+      "references": [
+        {
+          "file": "qlora.md",
+          "line": 26,
+          "label": "Transformers bitsandbytes 文档"
+        }
+      ],
+      "id": "S100"
+    },
+    {
+      "canonical_url": "https://qwenlm.github.io/blog/qwen1.5",
+      "urls": [
+        "https://qwenlm.github.io/blog/qwen1.5/"
+      ],
+      "labels": [
+        "Introducing Qwen1.5"
+      ],
+      "references": [
+        {
+          "file": "engineering-and-measurement.md",
+          "line": 24,
+          "label": "Introducing Qwen1.5"
+        }
+      ],
+      "id": "S101"
+    },
+    {
+      "canonical_url": "https://rajpurkar.github.io/SQuAD-explorer",
+      "urls": [
+        "https://rajpurkar.github.io/SQuAD-explorer/"
+      ],
+      "labels": [
+        "SQuAD 官方站点"
+      ],
+      "references": [
+        {
+          "file": "data-and-evaluation.md",
+          "line": 16,
+          "label": "SQuAD 官方站点"
+        }
+      ],
+      "id": "S102"
+    },
+    {
+      "canonical_url": "https://tridao.me/publications/flash2/flash2.pdf",
+      "urls": [
+        "https://tridao.me/publications/flash2/flash2.pdf"
+      ],
+      "labels": [
+        "FA2 正文 F02",
+        "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning"
+      ],
+      "references": [
+        {
+          "file": "flashattention-2.md",
+          "line": 10,
+          "label": "FA2 正文 F02"
+        },
+        {
+          "file": "flashattention-2.md",
+          "line": 26,
+          "label": "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning"
+        }
+      ],
+      "id": "S103"
+    },
+    {
+      "canonical_url": "https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html",
+      "urls": [
+        "https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html"
+      ],
+      "labels": [
+        "Triton Fused Softmax"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 32,
+          "label": "Triton Fused Softmax"
+        }
+      ],
+      "id": "S104"
+    },
+    {
+      "canonical_url": "https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html",
+      "urls": [
+        "https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html"
+      ],
+      "labels": [
+        "Triton Matrix Multiplication"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 33,
+          "label": "Triton Matrix Multiplication"
+        }
+      ],
+      "id": "S105"
+    },
+    {
+      "canonical_url": "https://triton-lang.org/main/getting-started/tutorials/05-layer-norm.html",
+      "urls": [
+        "https://triton-lang.org/main/getting-started/tutorials/05-layer-norm.html"
+      ],
+      "labels": [
+        "Triton Layer Normalization"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 34,
+          "label": "Triton Layer Normalization"
+        }
+      ],
+      "id": "S106"
+    },
+    {
+      "canonical_url": "https://triton-lang.org/main/getting-started/tutorials/06-fused-attention.html",
+      "urls": [
+        "https://triton-lang.org/main/getting-started/tutorials/06-fused-attention.html"
+      ],
+      "labels": [
+        "Triton Fused Attention",
+        "Triton attention"
+      ],
+      "references": [
+        {
+          "file": "related-work-and-learning.md",
+          "line": 35,
+          "label": "Triton Fused Attention"
+        },
+        {
+          "file": "related-work-and-learning.md",
+          "line": 39,
+          "label": "Triton attention"
+        }
+      ],
+      "id": "S107"
+    }
+  ]
+}

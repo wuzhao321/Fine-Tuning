@@ -1,0 +1,10 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e1_qlora",
+  "experiment": "E1",
+  "description": "qlora: FA2 + GC",
+  "role": "benchmark",
+  "quantization": {
+    "enabled": true
+  }
+}

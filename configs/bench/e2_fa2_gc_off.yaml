@@ -1,0 +1,13 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e2_fa2_gc_off",
+  "experiment": "E2",
+  "description": "Attention × GC ablation",
+  "role": "benchmark",
+  "attention": {
+    "implementation": "flash_attention_2"
+  },
+  "gc": {
+    "enabled": false
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e4_adamw_8bit",
+  "experiment": "E4",
+  "description": "Optimizer comparison; paging requires separate profiler evidence",
+  "role": "benchmark",
+  "optimizer": {
+    "name": "adamw_8bit"
+  }
+}

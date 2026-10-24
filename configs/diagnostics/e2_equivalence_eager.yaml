@@ -1,0 +1,22 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e2_equivalence_eager",
+  "experiment": "E2",
+  "description": "Paired numerical diagnostic; not throughput evidence",
+  "role": "equivalence",
+  "attention": {
+    "implementation": "eager"
+  },
+  "lora": {
+    "dropout": 0.0
+  },
+  "data": {
+    "seq_len": 1024,
+    "micro_batch": 1
+  },
+  "bench": {
+    "warmup_steps": 0,
+    "measure_steps": 20,
+    "repeats": 1
+  }
+}

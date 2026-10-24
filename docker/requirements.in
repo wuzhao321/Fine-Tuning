@@ -1,0 +1,18 @@
+# Candidate dependency names only. NOT a compatibility-tested lock.
+# Choose versions against the target GPU driver / CUDA / Python before installing.
+torch
+transformers
+peft
+bitsandbytes
+accelerate
+flash-attn
+datasets
+huggingface-hub
+numpy
+PyYAML
+nvidia-ml-py
+matplotlib
+openpyxl
+jieba
+rouge-score
+safetensors

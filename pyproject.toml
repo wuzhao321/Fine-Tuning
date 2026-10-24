@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-ft-repro"
+version = "0.1.0"
+description = "Traceable single-GPU Qwen1.5-14B LoRA / QLoRA experiments"
+requires-python = ">=3.10"
+dependencies = ["PyYAML"]
+
+[project.optional-dependencies]
+gpu = ["torch", "transformers", "peft", "bitsandbytes", "accelerate", "numpy", "nvidia-ml-py", "safetensors"]
+data = ["datasets", "huggingface-hub"]
+analysis = ["matplotlib", "openpyxl", "jieba", "rouge-score"]
+
+[project.scripts]
+ft-repro = "llm_ft_repro.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

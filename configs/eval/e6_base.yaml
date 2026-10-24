@@ -1,0 +1,22 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e6_base",
+  "experiment": "E6",
+  "description": "Matched NF4 inference for base and fine-tuned adapter",
+  "role": "eval",
+  "lora": {
+    "enabled": false
+  },
+  "gc": {
+    "enabled": false
+  },
+  "data": {
+    "mode": "task",
+    "path": "data/processed/tasks/train.jsonl",
+    "manifest": "data/processed/tasks/manifest.json",
+    "grad_accum": 8
+  },
+  "evaluation": {
+    "adapter_path": ""
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e3_sdpa_s1024",
+  "experiment": "E3",
+  "description": "Sequence-length scan; 8192 uses more tokens per step",
+  "role": "benchmark",
+  "attention": {
+    "implementation": "sdpa"
+  },
+  "data": {
+    "seq_len": 1024,
+    "micro_batch": 4
+  }
+}

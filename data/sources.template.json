@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "id": "TODO_SOURCE_ID",
+      "url": "TODO_DATASET_URL",
+      "license": "TODO_LICENSE_IDENTIFIER",
+      "license_url": "TODO_LICENSE_TEXT_URL",
+      "revision": "TODO_IMMUTABLE_DATASET_REVISION",
+      "approved": false,
+      "approved_by": "",
+      "approved_at": ""
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e3_eager_s512",
+  "experiment": "E3",
+  "description": "Sequence-length scan; 8192 uses more tokens per step",
+  "role": "benchmark",
+  "attention": {
+    "implementation": "eager"
+  },
+  "data": {
+    "seq_len": 512,
+    "micro_batch": 8
+  }
+}

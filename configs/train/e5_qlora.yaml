@@ -1,0 +1,16 @@
+{
+  "extends": "../base.yaml",
+  "run_id": "e5_qlora",
+  "experiment": "E5",
+  "description": "Same seed, data and training hyperparameters",
+  "role": "train",
+  "quantization": {
+    "enabled": true
+  },
+  "data": {
+    "mode": "task",
+    "path": "data/processed/tasks/train.jsonl",
+    "manifest": "data/processed/tasks/manifest.json",
+    "grad_accum": 8
+  }
+}

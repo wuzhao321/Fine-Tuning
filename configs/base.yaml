@@ -1,0 +1,89 @@
+{
+  "run_id": "base",
+  "experiment": "E0",
+  "description": "Explicit common protocol",
+  "role": "inspect",
+  "model": {
+    "path": "Qwen/Qwen1.5-14B",
+    "revision": "main",
+    "dtype": "bfloat16"
+  },
+  "quantization": {
+    "enabled": true,
+    "type": "nf4",
+    "double_quant": true,
+    "compute_dtype": "bfloat16"
+  },
+  "lora": {
+    "enabled": true,
+    "r": 64,
+    "alpha": 128,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "expected_trainable": 104857600
+  },
+  "attention": {
+    "implementation": "flash_attention_2"
+  },
+  "gc": {
+    "enabled": true,
+    "use_reentrant": false
+  },
+  "optimizer": {
+    "name": "paged_adamw_8bit",
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0
+  },
+  "data": {
+    "mode": "synthetic_packed",
+    "path": "data/processed/bench/tokens.u32",
+    "validation_path": "data/processed/tasks/validation.jsonl",
+    "test_path": "data/processed/tasks/test.jsonl",
+    "manifest": "data/processed/bench/tokens.u32.manifest.json",
+    "seq_len": 2048,
+    "micro_batch": 2,
+    "grad_accum": 1,
+    "max_target_tokens": 512
+  },
+  "bench": {
+    "warmup_steps": 10,
+    "measure_steps": 30,
+    "repeats": 3,
+    "nvml_interval_s": 0.1
+  },
+  "train": {
+    "learning_rate": 0.0002,
+    "scheduler": "cosine",
+    "warmup_ratio": 0.03,
+    "epochs": 1,
+    "seed": 42,
+    "save_steps": 100,
+    "eval_steps": 100,
+    "logging_steps": 10,
+    "save_total_limit": 3
+  },
+  "evaluation": {
+    "adapter_path": "",
+    "max_new_tokens": 512
+  },
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+    "TOKENIZERS_PARALLELISM": "false",
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "OMP_NUM_THREADS": "4"
+  },
+  "hardware": {
+    "peak_flops_tflops": 312,
+    "nvml_device": "0"
+  },
+  "output": {
+    "raw_dir": "results/raw",
+    "checkpoint_dir": "checkpoints"
+  }
+}
